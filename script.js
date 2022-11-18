@@ -23,9 +23,14 @@ function button1() {
 
 function button2() {
   document.body.innerHTML = pages[2];
+  document.getElementById("darkmode").checked = localStorage.getItem("darkMode")=="true"?true:false;
 }
 
 function button3() {
   document.body.innerHTML = pages[0];
   document.getElementById("fname").value = inputValue1;
+}
+
+function toggleDarkMode(){
+    localStorage.setItem("darkMode", document.getElementById("darkmode").checked);
 }
