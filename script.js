@@ -1,23 +1,15 @@
+let pagesUrls = ['page1.html', 'page2.html', 'page3.html'];
 let pages = [];
 let inputValue1 = "";
 
-//preload pages
-
-function loadFileToPages(file){
-fetch(file)
-  .then(response => response.text())
-  .then((data) => {
-    pages.push(data);
-  })
+async function loadFileToPages() {
+  const response = await fetch(pagesUrls[pages.length]);
+  const data = await response.text();
+  pages.push(data);
+  pages.length < pagesUrls.length ? loadFileToPages() : init();
 }
 
-loadFileToPages('page1.html');
-loadFileToPages('page2.html');
-loadFileToPages('page3.html');
-
-//wait till pages are loaded
-
-setTimeout(init,1000);
+loadFileToPages();
 
 function init() {
   document.body.innerHTML = pages[0];
